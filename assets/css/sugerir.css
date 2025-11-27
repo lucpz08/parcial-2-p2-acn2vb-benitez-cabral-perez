@@ -1,0 +1,112 @@
+/* ===================================
+   ESTILOS ESPECÍFICOS - sugerir.php
+   =================================== */
+
+/* Contenedor del formulario de sugerencias */
+.form-container {
+    background: var(--card-bg);
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    margin: 30px 0;
+}
+
+.suggestion-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+}
+
+/* Upload de archivos */
+.file-upload-wrapper {
+    position: relative;
+}
+
+.file-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.file-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--card-bg);
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.file-label:hover {
+    border-color: var(--primary);
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(139, 92, 246, 0.05));
+    transform: translateY(-2px);
+}
+
+.file-icon {
+    font-size: 24px;
+}
+
+.file-text {
+    color: var(--text);
+}
+
+.file-info {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--text);
+    opacity: 0.6;
+}
+
+.preview-container {
+    margin-top: 16px;
+    padding: 16px;
+    background: var(--bg);
+    border-radius: 10px;
+    border: 2px solid var(--border);
+}
+
+.preview-container img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+    box-shadow: var(--shadow-md);
+}
+
+/* Lista de juegos en sugerir */
+.games-list {
+    margin-top: 50px;
+}
+
+.games-list h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text);
+}
+
+/* Responsive para formulario */
+@media (max-width: 768px) {
+    .form-container {
+        padding: 20px;
+    }
+}

@@ -1,0 +1,38 @@
+/* ===================================
+   ESTILOS ESPECÍFICOS - index.php
+   =================================== */
+
+/* Formulario de búsqueda */
+.search-form {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    padding: 24px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+}
+
+.search-form input[type=text] {
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-form select {
+    min-width: 180px;
+}
+
+/* Responsive para search form */
+@media (max-width: 768px) {
+    .search-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-form input[type=text],
+    .search-form select {
+        width: 100%;
+    }
+}
