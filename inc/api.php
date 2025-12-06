@@ -245,6 +245,61 @@ try {
                 'message' => 'Review eliminada'
             ]);
             break;
+
+        case 'get_gameplay':
+            $youtubeApiKey = getenv('YOUTUBE_API_KEY');
+            $id = intval($_GET['id'] ?? 0);
+            $stmt = $pdo->prepare("SELECT titulo FROM items WHERE id = :id");
+            $stmt ->execute ([':id' => $id]);
+            $item = $stmt->fetch();
+
+            if (!$item || !$youtubeApiKey) {
+                http_response_code(404);
+                echo json_encode ([
+                    'success' => false,
+                    'message' => 'Error al recolectar datos de Youtube.'
+                ]);
+                break;
+            }
+
+            $tituloJuego = $item ['titulo'];
+            $query = urlencode($tituloJuego . 'gameplay trailer');
+            $youtubeApiUrl = 'https://www.googleapis.com/youtube/v3/search';
+
+            $params = [
+                'part'          => 'snippet',
+                'q'             => $query,
+                'key'           => $youtubeApiKey,
+                'type'          => 'video',
+                'maxResults'    => 1,
+            ];
+
+            $apiUrl = $youtubeApiUrl . '?' . http_build_query($params);
+            $response = @file_get_contents($apiUrl);
+
+            if ($response === false) {
+                http_response_code(503);
+                echo json_encode (['succes' => false, 'message' => 'Error al conectar con Youtube'.]);
+                break;
+            }
+
+            $data = json_decode($response, true);
+            $videoId = $data ['items'] [0] ['id'] ['videoId'] ?? null;
+            $videoTitle = $data ['items'] [0] ['snippet'] ['title'] ?? 'Video no encontrado';
+
+            if ($videoId) {
+                echo json_encode ([
+                    'success'    => true,
+                    'videoId'    => $videoId,
+                    'videoTitle' => $videoTitle
+                ]);
+            } else {
+                echo json_encode ([
+                    'success' => false,
+                    'message' => 'No se encontro video para ' . $tituloJuego
+                ]);
+            }
+            break;
             
         default:
             http_response_code(400);
