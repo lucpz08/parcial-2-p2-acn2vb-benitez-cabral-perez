@@ -247,7 +247,7 @@ try {
             break;
 
         case 'get_gameplay':
-            $youtubeApiKey = getenv('YOUTUBE_API_KEY');
+            $youtubeApiKey = 'SOLICITAR_API_KEY';
             $id = intval($_GET['id'] ?? 0);
             $stmt = $pdo->prepare("SELECT titulo FROM items WHERE id = :id");
             $stmt ->execute ([':id' => $id]);
@@ -279,7 +279,7 @@ try {
 
             if ($response === false) {
                 http_response_code(503);
-                echo json_encode (['succes' => false, 'message' => 'Error al conectar con Youtube'.]);
+                echo json_encode (['succes' => false, 'message' => 'Error al conectar con Youtube.']);
                 break;
             }
 

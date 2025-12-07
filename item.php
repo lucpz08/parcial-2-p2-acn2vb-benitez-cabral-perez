@@ -153,6 +153,14 @@ if (isset($_GET['delete_review'])) {
                 </div>
             </div>
 
+            <div class="video-section">
+            <h2>Gameplay Trailer</h2>
+                <div id="video-container" class="video-placeholder">
+                    <div class="loading-spinner"></div>
+                    <p>Buscando el mejor gameplay...</p>
+                </div>
+            </div>
+        
             <!-- Formulario de valoración -->
             <div class="review-form-container">
                 <h2>📝 Deja tu valoración</h2>
@@ -262,6 +270,45 @@ if (isset($_GET['delete_review'])) {
                 cerrarModal();
             }
         });
+
+        // Logica de Youtube
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarGameplay();
+        });
+
+        async function cargarGameplay() {
+            // Obtenemos el ID del juego directamente de PHP
+            const gameId = <?php echo $id; ?>;
+            const container = document.getElementById('video-container');
+
+            try {
+                const response = await fetch(`inc/api.php?action=get_gameplay&id=${gameId}`);
+                const data = await response.json();
+
+                if (data.success && data.videoId) {
+                    container.innerHTML = `
+                        <iframe 
+                            width="100%" 
+                            height="500px" 
+                            src="https://www.youtube.com/embed/${data.videoId}?rel=0&modestbranding=1" 
+                            title="${data.videoTitle}" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    `;
+                    container.classList.remove('video-placeholder'); 
+                    container.classList.add('video-ready');       
+                } else {
+                    
+                    container.innerHTML = `<p class="error-msg"> ${data.message || 'No se encontró gameplay disponible.'}</p>`;
+                }
+
+            } catch (error) {
+                console.error('Error cargando video:', error);
+                container.innerHTML = `<p class="error-msg">No se pudo cargar el video.</p>`;
+            }
+        }
     </script>
 </body>
 
