@@ -3,7 +3,8 @@ require __DIR__ . '/inc/config.php';
 require __DIR__ . '/inc/functions.php';
 
 // Parámetros GET
-$tema = isset($_GET['tema']) && $_GET['tema'] === 'oscuro' ? 'oscuro' : 'claro';
+//$tema = isset($_GET['tema']) && $_GET['tema'] === 'oscuro' ? 'oscuro' : 'claro';
+$tema = obtenerTema();
 
 // Obtener datos de la base de datos
 $pdo = getConnection();
@@ -28,8 +29,8 @@ $categorias = $stmtCat->fetchAll(PDO::FETCH_COLUMN);
         <div class="header">
             <h1>G.O.T.Y. 2025</h1>
             <div>
-                <a href="index.php?tema=claro">Tema claro</a> | <a href="index.php?tema=oscuro">Tema oscuro</a>
-                &nbsp;|&nbsp;<a href="sugerir.php?tema=<?php echo $tema; ?>">Sugerir un juego</a>
+                <a href="?tema=claro">Tema claro</a> | <a href="?tema=oscuro">Tema oscuro</a>
+                &nbsp;|&nbsp;<a href="sugerir.php">Sugerir un juego</a>
             </div>
         </div>
 

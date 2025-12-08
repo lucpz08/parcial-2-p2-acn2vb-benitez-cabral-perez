@@ -4,7 +4,8 @@ require __DIR__ . '/inc/functions.php';
 
 // Parámetros de consulta GET
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-$tema = isset($_GET['tema']) && $_GET['tema'] === 'oscuro' ? 'oscuro' : 'claro';
+//$tema = isset($_GET['tema']) && $_GET['tema'] === 'oscuro' ? 'oscuro' : 'claro';
+$tema = obtenerTema();
 
 // Conectar a la base de datos
 $pdo = getConnection();

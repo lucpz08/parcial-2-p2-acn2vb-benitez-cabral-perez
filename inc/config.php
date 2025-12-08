@@ -1,4 +1,10 @@
 <?php
+// CFG para iniciar sesion
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
 // Configuración de la base de datos usando SQLite (archivo local)
 define('DB_FILE', __DIR__ . '/../data/database.db');
 

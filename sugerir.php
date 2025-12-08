@@ -2,7 +2,8 @@
 require __DIR__ . '/inc/config.php';
 require __DIR__ . '/inc/functions.php';
 
-$tema = isset($_GET['tema']) && $_GET['tema'] === 'oscuro' ? 'oscuro' : 'claro';
+//$tema = isset($_GET['tema']) && $_GET['tema'] === 'oscuro' ? 'oscuro' : 'claro';
+$tema = obtenerTema();
 
 // Obtener categorías de la base de datos
 $pdo = getConnection();
