@@ -36,22 +36,19 @@ $categorias = $stmtCat->fetchAll(PDO::FETCH_COLUMN);
 
         <div id="mensaje-container"></div>
 
-        <!-- Formulario para buscar por categorias -->
-        <form id="search-form" class="search-form">
-            <input type="text" name="q" id="search-input" placeholder="Buscar por nombre...">
+    <!-- Formulario para filtrar por categorias y nombre. Usando AJAX-->
+    <form id="search-form" class="search-form" onsubmit="event.preventDefault();">
+    <input type="text" id="search-input" placeholder="Buscar por nombre..." oninput="cargarItems()">
 
-            <select name="categoria" id="categoria-select">
-                <option value="">-- Todas las categorías --</option>
-                <?php foreach ($categorias as $cat): ?>
-                    <option value="<?php echo e($cat); ?>">
-                        <?php echo e($cat); ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-
-            <input type="hidden" name="tema" value="<?php echo $tema; ?>">
-            <button type="submit">Buscar / Filtrar</button>
-        </form>
+    <select id="categoria-select" onchange="cargarItems()">
+        <option value="">-- Todas las categorías --</option>
+        <?php foreach ($categorias as $cat): ?>
+            <option value="<?php echo e($cat); ?>">
+                <?php echo e($cat); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    </form>
 
         <p id="results-count">Cargando...</p>
 
